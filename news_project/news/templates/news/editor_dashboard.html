@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editor Dashboard</title>
+</head>
+<body>
+    <h1>Editor Dashboard: Pending Approvals</h1>
+    <a href="{% url 'home_dashboard' %}">Back to Homepage</a>
+    <hr>
+    <ul>
+        {% for pending in pending_articles %}
+            <li>
+                <strong>{{ pending.article_title }}</strong><br>
+                By: {{ pending.author.username }}<br>
+                <p>{{ pending.article_content }}</p>
+                
+                <!-- Form to trigger the approval view -->
+                <form action="{% url 'approve_article' pending.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">Approve & Publish</button>
+                </form>
+            </li>
+        {% empty %}
+            <p>No pending articles to review.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

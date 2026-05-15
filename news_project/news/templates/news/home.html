@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Homepage</title>
+</head>
+<body>
+    <h1>Latest Approved News</h1>
+    <a href="{% url 'editor_dashboard' %}">Go to Editor Dashboard</a>
+    <hr>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <strong>{{ article.article_title }}</strong><br>
+                By: {{ article.author.username }}<br>
+                <p>{{ article.article_content }}</p>
+            </li>
+        {% empty %}
+            <p>No approved articles yet.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
